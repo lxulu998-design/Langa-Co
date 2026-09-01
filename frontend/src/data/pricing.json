@@ -1,0 +1,65 @@
+{
+  "websitePackages": [
+    {
+      "id": "starter",
+      "name": "STARTER",
+      "price": 200,
+      "label": "Perfect to get found",
+      "features": [
+        "1-page Squarespace-style website (your domain)",
+        "Google Business Profile setup",
+        "WhatsApp Button & Auto-Reply Integration",
+        "Mobile-first, loads in 2 seconds",
+        "Free .co.za domain for 1 year"
+      ],
+      "goal": "GET FOUND",
+      "recurring": true
+    },
+    {
+      "id": "growth",
+      "name": "GROWTH",
+      "price": 400,
+      "label": "Our most requested — for businesses who want daily leads",
+      "features": [
+        "Everything in Starter",
+        "4-page site (Home, Services, Reviews, Contact)",
+        "Customer Retention System: Abandoned lead WhatsApp follow-up",
+        "Review Collector (auto-asks happy customers for Google review)",
+        "Monthly content update",
+        "Basic SEO for Ballito + Durban keywords"
+      ],
+      "goal": "GET + RETAIN",
+      "recurring": true,
+      "popular": true
+    },
+    {
+      "id": "pro",
+      "name": "PRO",
+      "price": 750,
+      "label": "For shops & estates who want sales while they sleep",
+      "features": [
+        "Everything in Growth",
+        "Online payments + Product Catalog (up to 50 products)",
+        "Automated WhatsApp Broadcast for specials",
+        "Booking / Order System",
+        "Speed & Security monitoring",
+        "We manage everything for you"
+      ],
+      "goal": "SELL & SCALE",
+      "recurring": true
+    }
+  ],
+  "secondary": [
+    {
+      "id": "phones",
+      "name": "Langa Phones",
+      "description": "Refurbished iPhones with warranty — sold using our own growth system."
+    },
+    {
+      "id": "secure",
+      "name": "Langa Secure",
+      "description": "Loadshed-proof security systems for homes & plots. Leads from our growth website."
+    }
+  ],
+  "faq": "Do I pay upfront? No. R200/month. Cancel anytime. You own your domain."
+}

@@ -1,0 +1,12 @@
+{
+  "websitePackages": [
+    {"id":"starter","name":"STARTER","price":200,"label":"Perfect to get found","recurring":true},
+    {"id":"growth","name":"GROWTH","price":400,"label":"Most Popular","recurring":true},
+    {"id":"pro","name":"PRO","price":750,"label":"For shops & estates","recurring":true}
+  ],
+  "secondary": [
+    {"id":"phones","name":"Langa Phones","description":"Refurbished iPhones with warranty sold through our shop."},
+    {"id":"secure","name":"Langa Secure","description":"Loadshed-proof security systems for homes & plots."}
+  ],
+  "faq": "Do I pay upfront? No. R200/month. Cancel anytime. You own your domain."
+}
