@@ -1,0 +1,34 @@
+name: Create Netlify Site
+
+on:
+  workflow_dispatch:
+
+jobs:
+  create-site:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create site via Netlify API
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: |
+          node -e "const https=require('https');const fs=require('fs');const repo=process.env.GITHUB_REPOSITORY;const [owner,repoName]=repo.split('/');const token=process.env.NETLIFY_AUTH_TOKEN;const payload=JSON.stringify({name: repoName, repo:{provider:'github', owner: owner, repo: repoName}});const options={method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token}};const req=https.request('https://api.netlify.com/api/v1/sites',options,res=>{let d='';res.on('data',c=>d+=c);res.on('end',()=>{console.log(d);try{const obj=JSON.parse(d);fs.writeFileSync('NETLIFY_SITE_ID.txt', obj.id);console.log('WROTE', obj.id);}catch(e){console.error('PARSE/WRITE ERROR', e);console.error(d);process.exit(1);} });});req.on('error',e=>{console.error(e);process.exit(1);});req.write(payload);req.end();"
+
+      - name: Commit site id back to repo
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${REPO}
+          if [ -f NETLIFY_SITE_ID.txt ]; then
+            git add NETLIFY_SITE_ID.txt
+            git commit -m "Add Netlify site id" || echo "no changes"
+            git push origin HEAD:main
+          else
+            echo "NETLIFY_SITE_ID.txt not found"
+            exit 1
+          fi
