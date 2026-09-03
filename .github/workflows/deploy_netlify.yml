@@ -21,10 +21,16 @@ jobs:
         run: |
           cd frontend
           npm run build
+      - name: Set NETLIFY_SITE_ID from file if secret missing
+        id: set_site
+        run: |
+          if [ -z "${{ secrets.NETLIFY_SITE_ID }}" ] && [ -f NETLIFY_SITE_ID.txt ]; then
+            echo "NETLIFY_SITE_ID=$(cat NETLIFY_SITE_ID.txt)" >> $GITHUB_OUTPUT
+          fi
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v2.1.5
         with:
           publish-dir: frontend/dist
           production-deploy: true
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID || steps.set_site.outputs.NETLIFY_SITE_ID }}
